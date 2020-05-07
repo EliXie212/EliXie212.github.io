@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<title>W3.CSS Template</title>
+<title>A SARIMA Approach to a COVID-19 Dataset</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -38,9 +38,9 @@ body {font-family: "Lato", sans-serif}
 
   <!-- The Band Section -->
   <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="band">
-    <h2 class="w3-wide">A SARIMA Approach to a COVID-19 Data Set</h2>
-    <p class="w3-opacity"><i>for the final project of statistics 135</i></p>
-    <p class="w3-justify">A Time Series Model is a family of statistical model that aims to model data that progresses with time. The goal of time series model is to model any possible relationship between data points so the what is left is just random noises or random small fluctations. In this blog, I will talk about my approaches to use a time series model to model a dataset of number of cases of COVID-19 in a place called Timseria(fake place but real data) in a duration of 66 days. 
+    <h2 class="w3-wide">A SARIMA Approach to a COVID-19 Dataset</h2>
+    <p class="w3-opacity"><i>for the final project of statistics 135 spring 2020</i></p>
+    <p class="w3-justify">A time series model is a family of statistical model that aims to model data that progresses with time. The goal of time series model is to model any possible relationship between data points so the what is left is just random noises or random small fluctations. In this blog, I will talk about my approaches to use a time series model to model a dataset of number of cases of COVID-19 in a place called Timseria(fake place but real data) in a duration of 66 days. 
 
     We will start by exploreing the dataset by plotting it out! From the plot, we can see that the number of cases starts to skyrocked around day 50. However, since the difference our sample is huge, it's hard to observe what's the relationship between early data pointsd and later datapoints. As such, we can take the log of the daily counts of the identified cases to reduce the variance or bring the data on two extremes closer so we can what is happening in the middle. And of course, we see a clearn cutoff at around day 35. Emm it's not 50? That's where it is helpful to pay more attention to what is happening in the middle. Now that we have a good idea about what the general shape is like, let's dig into the dataset and start our analysis. First thing we might want to do is to take the difference between data points. Essentially you substract each points by the data points before it. So n becomes n - (n-1) etc. You might ask what happends to one? Well no pain no gains. But I promise you it will pay off later. The effect of taking difference is that it elimainate any linear trend. It is effectively equvalient to fitting a regression line to the data and getting the residuals. Why you may ask? Well think about this way, a linear trend essentially means that your data increases/decreases by a constant amount at each time step. If you take the difference between the data points, starting at the second data point, for point n, you take out (n-1) times the constant because the previous datapoint is obtained by first data times plus the constant (n-1) times in a perfect linear data set. In the same way, take the difference twice, or take the second order diffference, will elimainate any quadratic trend with a power 2. You might wonder "why we are doing this?" Well let't backtract a bit and think about what is the goal of time series model. The goal to model all relationship between points such that only noises or random fluctations are left. By taking the differencing, we are trying to get what is called weak stationarity, which basically means that the mean (average) of the data is approximately 0 and there is not trend or seaonality left in data. Wait, what on earth is seasonality? Well think about a data set of turkey sales in U.S., when would you expect most of the sales? Probably Novebemer right? Therefore, imagine if you plot out the monthly sales of turkey across many years, you can expect to see a big spike at every Novebermber. That is what we will call seasonabilty. Seasonabilty can taken out by doing what we can seasonal diffferecning. Totally didn't expect the way to take out seasonality would be seasonal differencing, aren't you? :) Since the seaonality doesn't seem to bump up any well in this dataset, we ill skip this part for now. 
     </P>
@@ -48,19 +48,19 @@ body {font-family: "Lato", sans-serif}
     <div class="w3-row w3-padding-32">
       <div class="w3-third">
         <p>Plot of the sample</p>
-        <img src="/w3images/eda.png" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
+        <img src="Figures_for_blog/eda.png" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
       </div>
       <div class="w3-third">
         <p>Plot of the log counts</p>
-        <img src="/w3images/eda_log.jpg" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
+        <img src="Figures_for_blog/eda_log.png" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
       </div>
       <div class="w3-third">
         <p>Plot after the first differencing</p>
-        <img src="/w3images/eda_diff1.png" class="w3-round" alt="Random Name" style="width:60%">
+        <img src="Figures_for_blog/eda_diff1.png" class="w3-round" alt="Random Name" style="width:60%">
       </div>
       <div class="w3-third">
         <p>Plot after the second order differencing</p>
-        <img src="/w3images/eda_diff2.png" class="w3-round" alt="Random Name" style="width:60%">
+        <img src="Figures_for_blog/eda_diff2.png" class="w3-round" alt="Random Name" style="width:60%">
       </div>
     </div>
 
@@ -68,13 +68,13 @@ body {font-family: "Lato", sans-serif}
     </P>
 
     <div class="w3-row w3-padding-32">
-      <div class="w3-third">
+      <div class="Figures_for_blog/w3-third">
         <p>ACF after second differecing</p>
-        <img src="/w3images/eda_diff2_acf.png" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
+        <img src="Figures_for_blog/eda_diff2_acf.png" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
       </div>
       <div class="w3-third">
         <p>PACF after second differecing</p>
-        <img src="/w3images/eda_diff2_pacf.png" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
+        <img src="Figures_for_blog/eda_diff2_pacf.png" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
       </div>
     </div>
 
@@ -84,15 +84,15 @@ body {font-family: "Lato", sans-serif}
     <div class="w3-row w3-padding-32">
       <div class="w3-third">
         <p>Model summary ARIMA(1, 2, 1)</p>
-        <img src="/w3images/121_s.png" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
+        <img src="Figures_for_blog/121_s.png" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
       </div>
       <div class="w3-third">
         <p>pacf ARIMA(1, 2, 1)</p>
-        <img src="/w3images/121_pacf.png" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
+        <img src="Figures_for_blog/121_pacf.png" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
       </div>
       <div class="w3-third">
         <p>Three "IC"s ARIMA(1, 2, 1)</p>
-        <img src="/w3images/121_3c.png" class="w3-round" alt="Random Name" style="width:60%">
+        <img src="Figures_for_blog/121_3c.png" class="w3-round" alt="Random Name" style="width:60%">
       </div>
     </div>
 
@@ -104,36 +104,32 @@ body {font-family: "Lato", sans-serif}
     <div class="w3-row w3-padding-32">
       <div class="w3-third">
         <p>After day 35</p>
-        <img src="/w3images/bandmember.jpg" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
+        <img src="Figures_for_blog/eda_35.png" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
       </div>
       <div class="w3-third">
         <p>Model summary ARIMA(2, 1, 0)</p>
-        <img src="/w3images/bandmember.jpg" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
+        <img src="Figures_for_blog/model2_s.png" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
       </div>
       <div class="w3-third">
         <p>pacf ARIMA(2, 1, 0)</p>
-        <img src="/w3images/bandmember.jpg" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
+        <img src="Figures_for_blog/model2_pacf.png" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
       </div>
       <div class="w3-third">
         <p>Three "IC"s ARIMA(2, 1, 0)</p>
-        <img src="/w3images/bandmember.jpg" class="w3-round" alt="Random Name" style="width:60%">
+        <img src="Figures_for_blog/010_3c.png" class="w3-round" alt="Random Name" style="width:60%">
       </div>
     </div>
 
      <p class="w3-justify">
-     However, so far, all the metrics we have seen only shows how well the model fit the sample. But how can we know if a model is good at makeing future preidcations? After, that's what we really care about! It is the same way if I want to make a practice final myself, what I really care is how well it matches the actual final in a week and not last year's final. To do this, we use some called cross validation. Cross validation can mean different things for other models, but in time series, it looks like this. I start with only half of my dataset, which we can train set, and fit an ARIMA models with the parameters that I think is good, and pretend that I don't know anything about the second half. Then I use the the model to predict the second half of the data set, which we call validation set, and calculate the average of differences between my prediction squared, which we call MSE. Then I add one more time point to my train set and take one aways from my test set. Then I fit and model with train and use the model to predict the test set, and then calculate the MSE again. We repeat the process until the test set runs out or the train set is the entire data set. Then we take the average MSE we get. In this way, we can a sense of how well our model will perform in the actual prediction. And after calculating MSE, the second model gives a better cross validation error. Now time to make actual predictions and all the predications for next ten days are shown in a plot along with the original data. One big warning sigh is the cross validation error for both model all look pretty large. This may mean that we need a even better model. However, we will end here today. I will update you guys if anythign else comes up. Thanks for reading! :)  
+     However, so far, all the metrics we have seen only shows how well the model fit the sample. But how can we know if a model is good at makeing future preidcations? After, that's what we really care about! It is the same way if I want to make a practice final myself, what I really care is how well it matches the actual final in a week and not last year's final. To do this, we use some called cross validation. Cross validation can mean different things for other models, but in time series, it looks like this. I start with only half of my dataset, which we can train set, and fit an ARIMA models with the parameters that I think is good, and pretend that I don't know anything about the second half. Then I use the the model to predict the second half of the data set, which we call validation set, and calculate the average of differences between my prediction squared, which we call MSE. Then I add one more time point to my train set and take one aways from my test set. Then I fit and model with train and use the model to predict the test set, and then calculate the MSE again. We repeat the process until the test set runs out or the train set is the entire data set. Then we take the average MSE we get. In this way, we can a sense of how well our model will perform in the actual prediction. And after calculating MSE, the second model gives a better cross validation error (not shown in the plots). Now time to make actual predictions and all the predications for next ten days are shown in a plot along with the original data. One big warning sigh is the cross validation error for both model all look pretty large. This may mean that we need a even better model. However, we will end here today. I will update you guys if anythign else comes up. Thanks for reading! :)  
 
      PS: The SARIMA is a even more comprehensive model than ARIMA. It can even model seasonalities in the data set but it also have 6 paremeters! So in the same way ARIMA can model ARMA, SARIMA can model ARIMA and ARMA.
       </p>
 
     <div class="w3-row w3-padding-32">
       <div class="w3-third">
-        <p>Cross validation</p>
-        <img src="/w3images/bandmember.jpg" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
-      </div>
-      <div class="w3-third">
         <p>Predictions</p>
-        <img src="/w3images/bandmember.jpg" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
+        <img src="final_pred.png" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
       </div>
     </div>
 
